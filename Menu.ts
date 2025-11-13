@@ -1,12 +1,22 @@
 import readlinesync = require("readline-sync");
 import { colors } from './src/util/Colors';
+import { Produto } from "./src/model/Produto";
+import { Hardware } from './src/model/Hardware';
+import { Software } from './src/model/Software';
+
 
 export function main() {
     
     //Variáveis Auxiliares
     let opcao, prodId, preco, quant: number;
-    let nome, infoExtra: string;
+    let nome: string;
+    const tipoProd = ['Software', 'Hardware'];
     const estado = ['Novo','Velho']
+
+// Criação automatica de Objetos(Teste)
+    let prod1: Software = new Software(1, 123, 1, "Windows 10", 1000, 100.0);
+    prod1.visualizar();
+
 
     while (true) {
 
@@ -18,7 +28,7 @@ export function main() {
         console.log("*****************************************************");
         console.log("                                                     ");
         console.log("            1 - Adicionar Produto                    ");
-        console.log("            2 - Listar todos us Produtos             ");
+        console.log("            2 - Listar todos os Produtos             ");
         console.log("            3 - Buscar Produto por Numero de ID      ");
         console.log("            4 - Atualizar Dados do Produto           ");
         console.log("            5 - Apagar Produto                       ");
