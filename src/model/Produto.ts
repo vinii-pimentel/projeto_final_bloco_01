@@ -54,6 +54,21 @@ export abstract class Produto {
         this._preco = preco;
     }
 
+    public promocao(valor: number): boolean {
+
+        if (valor > 1) {
+            console.log("\nValor invalido! Promoção é para abaixar o preço e não aumentar!");
+            return false;
+        }
+        else if (valor <= 0){
+            console.log("\nNão dá pra dar de graça né!!");
+            return false;
+        }
+
+        this._preco = this._preco * valor;
+        return true;
+    }
+
     public visualizar(): void {
 
         let tipo: string = "";

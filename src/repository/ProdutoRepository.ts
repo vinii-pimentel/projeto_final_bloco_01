@@ -8,5 +8,8 @@ export interface ProdutoRepository {
 	cadastrar(produto: Produto): void;
 	atualizar(produto: Produto): void;
 	deletar(prodId: number): void;
+
+	// Métodos Bancários
+	promocao(prodId: number, valor: number): void;
 	
 }

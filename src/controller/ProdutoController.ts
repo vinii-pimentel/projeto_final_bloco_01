@@ -52,6 +52,19 @@ export class ProdutoController implements ProdutoRepository{
                     " não foi encontrado!", colors.reset);
         //throw new Error("Method not implemented.");
     }
+    promocao(prodId: number, valor: number): void {
+        let produto = this.buscarNoArray(this.prodId);
+		
+		if (produto != null) {
+			
+			if(produto.promocao(valor) == true)
+            console.log(colors.fg.green,"\nPromoção de: " +(valor*100)+ "% inserida no produto de ID: "+ prodId, colors.reset);		
+		
+		}else
+        console.log(colors.fg.red,"\nO Produto de ID numero: " + prodId + 
+                    " não foi encontrado!", colors.reset);
+        //throw new Error("Method not implemented.");
+    }
     
     //MÉTODOS AUXILIARES
 

@@ -11,7 +11,7 @@ export function main() {
     let produtos: ProdutoController = new ProdutoController();
 
     //Variáveis Auxiliares
-    let opcao, prodId, tipo, preco, quant, tamanho, peso: number;
+    let opcao, prodId, tipo, preco, quant, tamanho, peso, valor: number;
     let nome: string;
     const tipoProd = ['Software', 'Hardware'];
     //const estado = ['Novo','Velho']
@@ -37,7 +37,7 @@ export function main() {
         console.log("            3 - Buscar Produto por Numero de ID      ");
         console.log("            4 - Atualizar Dados do Produto           ");
         console.log("            5 - Apagar Produto                       ");
-        console.log("            6 - TBA                                  ");
+        console.log("            6 - Colocar Promoção no Produto          ");
         console.log("            7 - TBA                                  ");
         console.log("            8 - TBA                                  ");
         console.log("            9 - Sair                                 ");
@@ -155,7 +155,15 @@ export function main() {
                 keyPress()
                 break;
             case 6:
-                console.log(colors.fg.whitestrong, "\n\nFuncionalidade ainda sendo desenvolvida, Aguarde!\n\n", colors.reset);
+                console.log(colors.fg.whitestrong, "\n\nColocar Promoção\n\n", colors.reset);
+
+                console.log("Digite o número de ID do Produto: ");
+                prodId = readlinesync.questionInt("");
+
+                console.log("\nDigite quantos porcento vai deixar o valor do Produto (lembre 1=100% e vai caindo até 0.01=1%): ");
+                valor = readlinesync.questionFloat("");
+
+                produtos.promocao(prodId, valor);
 
                 keyPress()
                 break;
