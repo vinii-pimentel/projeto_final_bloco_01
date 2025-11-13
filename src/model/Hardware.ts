@@ -8,17 +8,17 @@ export class Hardware extends Produto {
         super(prodId, quant, tipo, nome, preco);
         this._peso = peso;
     }
-    public get aniversario() {
+    public get peso() {
         return this._peso;
     }
 
-    public set aniversario(aniversario: number) {
-        this._peso = aniversario;
+    public set peso(peso: number) {
+        this._peso = peso;
     }
 
     public visualizar(): void {
         super.visualizar();
-        console.log("Peso do Produto: " + this._peso);
+        console.log("Peso do Produto: " + this._peso+"kg");
     }
 
 }

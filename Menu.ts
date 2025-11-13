@@ -3,19 +3,24 @@ import { colors } from './src/util/Colors';
 import { Produto } from "./src/model/Produto";
 import { Hardware } from './src/model/Hardware';
 import { Software } from './src/model/Software';
+import { ProdutoController } from "./src/controller/ProdutoController";
 
 
 export function main() {
-    
+    //Instância da Classe ContaController
+    let produtos: ProdutoController = new ProdutoController();
+
     //Variáveis Auxiliares
-    let opcao, prodId, preco, quant: number;
+    let opcao, prodId, tipo, preco, quant, tamanho, peso: number;
     let nome: string;
     const tipoProd = ['Software', 'Hardware'];
-    const estado = ['Novo','Velho']
+    //const estado = ['Novo','Velho']
 
 // Criação automatica de Objetos(Teste)
-    let prod1: Software = new Software(1, 123, 1, "Windows 10", 1000, 100.0);
-    prod1.visualizar();
+    // let prod1: Software = new Software(1, 123, 1, "Windows 10", 1000, 100.0);
+    // let prod2: Hardware = new Hardware(1, 123, 2, "Windows 10", 1000, 23);
+    // prod1.visualizar();
+    // prod2.visualizar();
 
 
     while (true) {
@@ -55,24 +60,97 @@ export function main() {
             case 1:
                 console.log(colors.fg.whitestrong, "\n\nAdicionar Produto\n\n", colors.reset);
 
+                console.log(`Digite a Quantidade de produtos em estoque: `);
+                quant = readlinesync.questionInt("")
+
+                console.log(`Digite o Nome do Produto: `);
+                nome = readlinesync.question("")
+
+                console.log(`Digite o Tipo de Produto: `);
+                tipo = readlinesync.keyInSelect(tipoProd, "", {cancel: false}) +1;
+
+                console.log(`Digite o Preço do Produto (R$): `);
+                preco = readlinesync.questionFloat("")
+
+                switch (tipo){
+                    case 1:
+                        console.log(`Digite o Tamanho em Megabytes do Produto (MB): `);
+                        tamanho = readlinesync.questionFloat("")
+                        produtos.cadastrar(new Software(produtos.gerarNumero(), quant, tipo, nome, preco, tamanho));
+                        break;
+                    case 2:
+                        console.log(`Digite o peso do Produto: `);
+                        peso = readlinesync.questionFloat("")
+                        produtos.cadastrar(new Hardware(produtos.gerarNumero(), quant, tipo, nome, preco, peso));
+                        break;
+                }
+
                 keyPress()
                 break;
             case 2:
                 console.log(colors.fg.whitestrong, "\n\nListar todos os Produtos\n\n", colors.reset);
+
+                produtos.listarTodas();
 
                 keyPress()
                 break;
             case 3:
                 console.log(colors.fg.whitestrong, "\n\nBuscar Produto por Numero de ID\n\n", colors.reset);
 
+                console.log("Digite o número do ID do Produto: ");
+                prodId = readlinesync.questionInt("");
+                produtos.procurarPorNumero(prodId);
+
                 keyPress()
                 break;
             case 4:
                 console.log(colors.fg.whitestrong, "\n\nAtualizar Dados do Produto\n\n", colors.reset);
+                
+                console.log("Digite o numero de ID do Produto: ");
+                prodId = readlinesync.questionInt("");
+
+                let conta = produtos.buscarNoArray(prodId);
+
+                if (conta != null) {
+
+                    console.log(`Digite a Quantidade de produtos em estoque: `);
+                    quant = readlinesync.questionInt("")
+
+                    console.log(`Digite o Nome do Produto: `);
+                    nome = readlinesync.question("")
+
+                    console.log(`Digite o Tipo de Produto: `);
+                    tipo = readlinesync.keyInSelect(tipoProd, "", {cancel: false}) +1;
+
+                    console.log(`Digite o Preco do Produto (R$): `);
+                    preco = readlinesync.questionFloat("")
+
+                    switch (tipo){
+                        case 1:
+                            console.log(`Digite o Tamanho em Megabytes do Produto (MB): `);
+                            tamanho = readlinesync.questionFloat("")
+                            produtos.atualizar(new Software(prodId, quant, tipo, nome, preco, tamanho));
+                            break;
+                        case 2:
+                            console.log(`Digite o peso do Produto: `);
+                            peso = readlinesync.questionFloat("")
+                            produtos.atualizar(new Hardware(prodId, quant, tipo, nome, preco, peso));
+                            break;
+                    }
+                }
+                else {
+                    console.log(colors.fg.red, "\nO Produto de ID numero: " + prodId + 
+                    " não foi encontrado!", colors.reset);
+                }
+                
                 keyPress()
                 break;
             case 5:
                 console.log(colors.fg.whitestrong, "\n\nApagar Produto\n\n", colors.reset);
+
+                console.log("Digite o número de ID do Produto: ");
+                prodId = readlinesync.questionInt("");
+                produtos.deletar(prodId);
 
                 keyPress()
                 break;

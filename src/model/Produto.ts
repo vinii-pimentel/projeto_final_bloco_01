@@ -54,21 +54,6 @@ export abstract class Produto {
         this._preco = preco;
     }
 
-    public sacar(valor: number): boolean {
-
-        if (this._preco < valor) {
-            console.log("\n Preco Insuficiente!");
-            return false;
-        }
-
-        this._preco = this._preco - valor;
-        return true;
-    }
-
-    public depositar(valor: number): void {
-        this._preco = this._preco + valor;
-    }
-
     public visualizar(): void {
 
         let tipo: string = "";
@@ -89,7 +74,7 @@ export abstract class Produto {
         console.log("Nome do Produto: " + this._nomeProd);
         console.log("Quantidade restante: " + this._quant);
         console.log("Tipo do Produto: " + tipo);
-        console.log("Preco: " + this._preco.toFixed(2));
+        console.log("Preco: R$" + this._preco.toFixed(2));
 
     }
 

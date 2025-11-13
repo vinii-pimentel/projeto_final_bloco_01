@@ -19,7 +19,7 @@ export class Software extends Produto {
 
     public visualizar(): void {
         super.visualizar();
-        console.log("Tamanho em Megabytes do Software: " + this._tamanho.toFixed(2));
+        console.log("Tamanho em Megabytes do Software: " + this._tamanho.toFixed(2)+"MB");
     }
 
 }
